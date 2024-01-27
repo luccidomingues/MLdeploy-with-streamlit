@@ -1,6 +1,6 @@
-import yaml
+# import yaml
 import streamlit as st
-from yaml.loader import SafeLoader
+# from yaml.loader import SafeLoader
 import streamlit_authenticator as stauth
 
 import pandas as pd
