@@ -1,6 +1,6 @@
-# import yaml
+import yaml
 import streamlit as st
-# from yaml.loader import SafeLoader
+from yaml.loader import SafeLoader
 import streamlit_authenticator as stauth
 
 import pandas as pd
@@ -11,19 +11,21 @@ from sklearn.cluster import KMeans, AgglomerativeClustering
 # hashed_passwords = stauth.Hasher(['marketing', 'datascience']).generate()
 # st.write(hashed_passwords)
 
+with open('config.yaml') as file:
+    config = yaml.load(file, Loader=SafeLoader)
 
-
-# with open('config.yaml') as file:
-    # config = yaml.load(file, Loader=SafeLoader)
-
-# authenticator = stauth.Authenticate(
-#     config['credentials'],
-#     config['cookie']['name'],
-#     config['cookie']['key'],
-#     config['cookie']['expiry_days'],
-# )
+authenticator = stauth.Authenticate(
+    config['credentials'],
+    config['cookie']['name'],
+    config['cookie']['key'],
+    config['cookie']['expiry_days'],
+)
 
 # name, authentication_status, username = authenticator.login('Login', 'sidebar')
+# name, authentication_status, username = authenticator.login(fields=['Login'], location='sidebar')
+name, authentication_status, username = authenticator.login(fields={'Login': 'Login'}, location='sidebar')
+
+
 
 
 @st.cache_data
